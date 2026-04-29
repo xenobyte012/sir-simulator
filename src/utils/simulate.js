@@ -1,32 +1,23 @@
-// This function runs your mathematical model
-// T(n+1) = Tn * (1 + Ln)
-
 export function simulateGrowth(T0, steps, type) {
-  let T = T0;
+  let T_dynamic = T0;
+  let T_static = T0;
+  const static_growth = 0.05; // 5% constant growth
   const data = [];
 
   for (let n = 0; n < steps; n++) {
     let Ln;
+    if (type === "increasing") Ln = 0.005 * n;
+    else if (type === "decreasing") Ln = 0.1 / (n + 1);
+    else if (type === "oscillating") Ln = 0.1 * Math.sin(n);
 
-    // Dynamic growth factor based on selection
-    if (type === "increasing") {
-      Ln = 0.02 * n; // grows over time
-    } 
-    else if (type === "decreasing") {
-      Ln = 1 / (n + 1); // decreases over time
-    } 
-    else if (type === "oscillating") {
-      Ln = 0.1 * Math.sin(n); // waves
-    }
-
-    // Apply recursive formula
-    T = T * (1 + Ln);
+    T_dynamic = T_dynamic * (1 + Ln);
+    T_static = T_static * (1 + static_growth);
 
     data.push({
       time: n,
-      value: Number(T.toFixed(2)),
+      Dynamic: Number(T_dynamic.toFixed(2)),
+      Static: Number(T_static.toFixed(2)),
     });
   }
-
   return data;
 }

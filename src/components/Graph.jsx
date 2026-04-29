@@ -8,7 +8,8 @@ function Graph({ data }) {
         <XAxis dataKey="time" />
         <YAxis />
         <Tooltip />
-        <Line type="monotone" dataKey="value" stroke="#2563eb" />
+        <Line type="monotone" dataKey="Dynamic" stroke="#2563eb" strokeWidth={3} dot={false} />
+<Line type="monotone" dataKey="Static" stroke="#94a3b8" strokeDasharray="5 5" dot={false} />
       </LineChart>
     </div>
   );
