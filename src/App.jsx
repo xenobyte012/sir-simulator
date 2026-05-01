@@ -20,7 +20,7 @@ function App() {
         Disease Spread Simulator
       </h1>
 
-      <div className="grid md:grid-cols-2 gap-4">
+      <div className="grid lg:grid-cols-2 gap-4">
         <Controls onRun={runSimulation} />
         
         {data.length > 0 && <Graph data={data} />}
