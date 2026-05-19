@@ -4,30 +4,80 @@ const MODEL_DETAILS = {
     color: "text-red-600",
     border: "border-red-200",
     bg: "bg-red-50",
-    formula: "L_n = 0.02n", // Linear growth logic
-    summary: "Represents a system where the virus outpaces all interventions.",
-    scenarios: ["New variants", "Large public gatherings", "High population density"],
-    mathNote: "The system is unstable. As n increases, Ln grows linearly, causing the total infections to accelerate beyond exponential limits.",
+    formula: "L_n = 0.02n",
+
+    summary:
+      "This model shows infections growing quickly because control methods are weak or absent.",
+
+    scenarios: [
+      "New virus variants spreading faster",
+      "Large public gatherings",
+      "High population density",
+      "People not wearing masks",
+      "Low vaccination rates",
+      "Schools reopening without precautions",
+      "Poor healthcare access",
+      "Crowded public transport",
+      "Ignoring quarantine rules",
+      "International travel increasing infections",
+    ],
+
+    mathNote:
+      "The growth factor becomes bigger over time. This means infections continue increasing and become harder to control.",
   },
+
   decreasing: {
     title: "Convergent Suppression",
     color: "text-green-600",
     border: "border-green-200",
     bg: "bg-green-50",
-    formula: "L_n = 1 / (n + 1)", // Fractional decay logic
-    summary: "Represents the 'Flattening the Curve' effect through active control.",
-    scenarios: ["Mass vaccination", "Strict lockdowns", "Increased public hygiene"],
-    mathNote: "The growth factor Ln approaches 0 as n increases. This leads to the system stabilizing (convergence), eventually halting new infections.",
+    formula: "L_n = 1 / (n + 1)",
+
+    summary:
+      "This model shows infections slowing down because prevention methods are working.",
+
+    scenarios: [
+      "Mass vaccination campaigns",
+      "Strict lockdowns",
+      "People washing hands often",
+      "Wearing masks in public",
+      "Better healthcare systems",
+      "Testing and isolating infected people",
+      "Public awareness campaigns",
+      "Travel restrictions",
+      "Improved sanitation",
+      "Early treatment reducing spread",
+    ],
+
+    mathNote:
+      "The growth factor gets smaller over time. Eventually infections slow down and the spread becomes controlled.",
   },
+
   oscillating: {
     title: "Periodic Oscillation (Waves)",
     color: "text-blue-600",
     border: "border-blue-200",
     bg: "bg-blue-50",
-    formula: "L_n = 0.1 * sin(n)", // Sine wave logic
-    summary: "Simulates the 'tug-of-war' between spread and social behavior.",
-    scenarios: ["Seasonal flu cycles", "Policy changes (Opening/Closing schools)", "Holiday travel spikes"],
-    mathNote: "The sine function creates periodic cycles. Positive values simulate outbreaks, while negative values simulate temporary recovery phases.",
+    formula: "L_n = 0.1 * sin(n)",
+
+    summary:
+      "This model shows infection waves where cases rise and fall repeatedly.",
+
+    scenarios: [
+      "Seasonal flu outbreaks",
+      "Holiday travel increasing cases",
+      "Opening and closing schools",
+      "Changes in lockdown rules",
+      "Winter seasons causing more infections",
+      "People becoming less careful over time",
+      "Festivals and sports events",
+      "Workplaces reopening",
+      "Tourism seasons",
+      "Repeated virus outbreaks",
+    ],
+
+    mathNote:
+      "The infection numbers go up and down over time. This creates waves similar to real disease outbreaks.",
   },
 };
 
@@ -37,56 +87,73 @@ function ModelInfo({ type }) {
   if (!info) return null;
 
   return (
-    <div className={`p-6 rounded-3xl shadow-lg border-2 transition-all duration-500 ${info.border} ${info.bg}`}>
+    <div
+      className={`p-6 rounded-3xl shadow-lg border-2 transition-all duration-500 ${info.border} ${info.bg}`}
+    >
       <div className="flex justify-between items-start mb-4">
         <div>
-          {/* Section Label: Connects UI to Research Category */}
           <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400 block mb-1">
-            Methodological Analysis
+            Method Analysis
           </span>
-          <h2 className={`font-black text-2xl tracking-tight ${info.color}`}>
-            {info.title}
-          </h2>
+
+          <h2 className={`font-black text-2xl ${info.color}`}>{info.title}</h2>
+
           <div className="flex items-center gap-2 mt-2">
-            <span className="text-[10px] font-bold text-gray-500 uppercase">Growth Function:</span>
-            <code className="text-xs font-mono bg-white/50 px-2 py-1 rounded border inline-block">
+            <span className="text-[10px] font-bold text-gray-500 uppercase">
+              Formula:
+            </span>
+
+            <code className="text-xs font-mono bg-white px-2 py-1 rounded border">
               {info.formula}
             </code>
           </div>
         </div>
-        <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-white ${info.color} shadow-sm border border-current/10`}>
+
+        <span
+          className={`px-3 py-1 rounded-full text-xs font-bold uppercase bg-white ${info.color}`}
+        >
           {type} model
         </span>
       </div>
 
-      {/* Summary Section Label */}
+      {/* Summary */}
       <div className="mb-4">
-        <span className="text-[10px] font-bold uppercase text-gray-400 block mb-1">Predictive Summary</span>
-        <p className="text-gray-800 font-medium leading-relaxed">
-          {info.summary}
-        </p>
+        <span className="text-[10px] font-bold uppercase text-gray-400 block mb-1">
+          What It Means
+        </span>
+
+        <p className="text-gray-800">{info.summary}</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-gray-200/50">
-        {/* Real World Applications Label */}
-        <div className="space-y-2">
-          <h3 className="text-[10px] font-bold uppercase text-gray-400 tracking-wider">Epidemiological Drivers</h3>
-          <ul className="space-y-1">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t">
+        {/* Examples */}
+        <div>
+          <h3 className="text-[10px] font-bold uppercase text-gray-400 mb-2">
+            Real Life Examples
+          </h3>
+
+          <ul className="space-y-2">
             {info.scenarios.map((s, i) => (
               <li key={i} className="flex items-center text-sm text-gray-700">
-                <span className={`mr-2 h-1.5 w-1.5 rounded-full ${info.color.replace('text', 'bg')}`} />
+                <span
+                  className={`mr-2 h-2 w-2 rounded-full ${info.color.replace(
+                    "text",
+                    "bg",
+                  )}`}
+                />
                 {s}
               </li>
             ))}
           </ul>
         </div>
 
-        {/* Theoretical Analysis Label */}
-        <div className="bg-white/40 p-4 rounded-xl border border-white/60">
-          <h3 className="text-[10px] font-bold uppercase text-gray-400 tracking-wider mb-1">Mathematical Behavior</h3>
-          <p className="text-xs text-gray-600 italic leading-snug">
-            {info.mathNote}
-          </p>
+        {/* Math explanation */}
+        <div className="bg-white/40 p-4 rounded-xl border">
+          <h3 className="text-[10px] font-bold uppercase text-gray-400 mb-2">
+            Mathematical Explanation
+          </h3>
+
+          <p className="text-sm text-gray-600">{info.mathNote}</p>
         </div>
       </div>
     </div>
